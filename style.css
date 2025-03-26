@@ -1,0 +1,118 @@
+/* --- Переменные --- */
+:root {
+    --main-red: #ff0000;
+    --acid-yellow: #ccff00;
+    --deep-blue: #0000ff;
+    --black: #000000;
+    --white: #f0f0f0;
+    --dark-bg: #1a1a1a;
+    --font-main: 'Special Elite', monospace;
+}
+
+/* --- Общие стили --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--dark-bg);
+    color: var(--white);
+    font-family: var(--font-main);
+    overflow-x: hidden; /* Для index.html */
+    position: relative;
+}
+
+/* Стилизация выделения текста */
+::selection { background-color: var(--main-red); color: var(--acid-yellow); text-shadow: none; }
+::-moz-selection { background-color: var(--main-red); color: var(--acid-yellow); text-shadow: none; }
+
+/* --- Оверлеи --- */
+.noise-overlay, .grid-overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none; /* Убедимся, что они не мешают */
+    /* z-index управляется в contact.html через inline style, здесь можно оставить базовый */
+}
+.noise-overlay {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAMAAAAp4XiDAAAAUVBMVEWFhYWDg4N3d3dtbW17e3t1dXWBgYGHh4d5eXlzc3OLi4ubm5uVlZWPj4+NjY19fX2JiYl/f39ra2uRkZGZmZlpaWmXl5dvb29xcXGTk5NnZ2c8TV1PAAAAAXRSTlMAQObYZgAAAAlwSFlzAAAASAAAAEgARslrPgAAAZlJREFUOPOLFklywzAQAmf//9vj5C0QrQi7271kzd9h5E10Z214R2nNKVb7uJ/H+s9gHv/f2B/HzsV/j58V/j7/p8Vfj58f/j5+v/Xj3/z7/5e/+Xf/nv9n/y07l+9x/x77/2P8/5f/v//3ff/r/+c/x/8H/p/6n//v/h///9f/L//3/7/q/7/+f/3/7f/3/+v/z//z//8v/6P/2//T/9H/9f/zP/0f/x/7D/zf/2/7j//zP+0/8D/sv/9f/h/+P/3/7v/8/9f/5f/X//T/7f/0//L/+v/4//c//9//X/+z//f/9f+9/+L/+L/+3/x//D//r/+8/9f/0f/d//P/+j/+//h/+T/6f/q/+z//T/3f+P/+v/lf/4f/k//v/0f/v/2/7j/+r/1f/q//L/7X//T/3X/+L/2H/+f/m/+D/5f/V/9r//f/3/+v/8f/8f/2/+p//P/7f/6//r//7//N//F//b//X/3//b//3/+b//f/2/+p//P/7P/2/7v/8P/+f/q/+7/7P/3f+f/3/+n//x//w/9v/7P/3P//7/u//3/6/+v/5P/8f/v/+z//V/9f/x//N//P/zP/wf/j/9D/8f/u//z/+v/4v/4v/6f/1//9//j//L/6v/5f/X/+z//d//7//P/+3//L//7/uP/7P/9f/zP/1f/x/8D/9v/7P/4f/v//z/+b//n/3//1/8v/q/+//x//T//X/+f/3//j//n/7f/2//x//b//j//D//7//r//T//H//r//z//3//P//z//z//n/+n//p//x//p//n//n//P/+n//X//3/+v//x//T//L//v//D//f//T//j//7//b//v//T//7//P//n//X//7//7//P//P//7/7f/V/8v/7/+n//3//v//r//T//n//3//v//3//v//3//7//v//z//3//3/9///+//v////3//v////3///9=');
+    opacity: 0.05;
+}
+.grid-overlay {
+    background-size: 40px 40px;
+    background-image: linear-gradient(to right, var(--deep-blue) 1px, transparent 1px), linear-gradient(to bottom, var(--deep-blue) 1px, transparent 1px);
+    opacity: 0.15; animation: flicker 5s infinite linear alternate;
+}
+
+/* --- Шапка и Навигация (только для index.html) --- */
+header { padding: 20px 5%; border-bottom: 1px dashed var(--main-red); position: relative; z-index: 10; }
+nav { display: flex; justify-content: center; gap: 30px; }
+nav a { color: var(--white); text-decoration: none; font-size: 1.1em; padding: 5px; position: relative; transition: color 0.3s ease; }
+nav a:hover { color: var(--acid-yellow); text-shadow: 0 0 5px var(--acid-yellow); }
+nav a::after { content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 2px; background-color: var(--main-red); transition: width 0.4s ease; transform: skewX(-15deg); }
+nav a:hover::after { width: 100%; }
+
+/* --- Секция Hero (только для index.html) --- */
+.hero { min-height: 70vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 50px 20px; position: relative; overflow: hidden; }
+.hero-background { position: absolute; top: -10%; left: -10%; width: 120%; height: 120%; background-image: url('art_image.jpg'); background-size: cover; background-position: center; opacity: 0.3; filter: contrast(1.5) saturate(1.2); z-index: -1; }
+.hero::after { content: ''; position: absolute; top: 50%; left: -10%; width: 120%; height: 30px; background: repeating-linear-gradient( -45deg, var(--main-red), var(--main-red) 10px, rgba(255,0,0,0.5) 10px, rgba(255,0,0,0.5) 20px ); transform: translateY(-50%) skewY(-5deg); mix-blend-mode: difference; z-index: 1; opacity: 0.6; animation: blend-move 10s infinite linear alternate; }
+.hero h1 { font-size: 5rem; color: var(--acid-yellow); margin-bottom: 10px; text-shadow: 2px 2px 0 var(--main-red), -2px -2px 0 var(--deep-blue); position: relative; letter-spacing: 5px; z-index: 2; }
+.hero p { font-size: 1.3em; color: var(--white); margin-bottom: 30px; max-width: 600px; position: relative; z-index: 2; }
+.cta-button { background-color: var(--main-red); color: var(--white); border: none; padding: 12px 30px; font-family: var(--font-main); font-size: 1.1em; cursor: pointer; transition: all 0.3s ease; border: 2px solid var(--main-red); position: relative; overflow: hidden; z-index: 2; }
+.cta-button:hover { background-color: var(--dark-bg); color: var(--main-red); transform: skewX(-10deg) scale(1.05); box-shadow: 0 0 15px var(--main-red); }
+.cta-button:active { animation: shake 0.4s linear; }
+
+/* --- Секция Content (только для index.html) --- */
+.content { padding: 60px 5%; background-color: rgba(0, 0, 0, 0.2); border-top: 3px dotted var(--acid-yellow); position: relative; z-index: 5; }
+.content h2 { text-align: center; font-size: 2.5rem; color: var(--acid-yellow); margin-bottom: 40px; text-shadow: 1px 1px 0 var(--main-red); }
+.content-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; }
+.card { background-color: var(--dark-bg); border: 1px solid var(--deep-blue); padding: 25px; position: relative; transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease; clip-path: polygon(0 5%, 95% 0, 100% 95%, 5% 100%); }
+.card:hover { transform: translateY(-10px) rotate(1deg); box-shadow: 0 10px 20px rgba(0, 0, 255, 0.3); filter: brightness(1.1); }
+.card h3 { color: var(--main-red); font-size: 1.5em; margin-bottom: 10px; }
+.card p { font-size: 1em; line-height: 1.6; }
+.card-scribble { position: absolute; top: -10px; right: -10px; width: 50px; height: 50px; border: 3px solid var(--deep-blue); border-radius: 50% 30% 70% 40% / 60% 40% 60% 40%; transform: rotate(-15deg); opacity: 0.7; }
+.card-scribble.red { border-color: var(--main-red); }
+.card-scribble.yellow { border-color: var(--acid-yellow); }
+
+/* --- Стили для секции/страницы Контакт (используются в contact.html) --- */
+/* Базовые стили для .contact остаются, они используются для layout в contact.html */
+.contact {
+    /* Убираем стили, которые теперь заданы inline в contact.html */
+    /* padding, min-height, display, justify-content, align-items, text-align */
+    overflow: hidden;
+    position: relative;
+    /* z-index теперь управляется в contact.html */
+}
+
+.contact-message {
+    font-size: clamp(2.5rem, 10vw, 6rem);
+    color: var(--main-red);
+    line-height: 1.2;
+    text-shadow: 3px 3px 0 var(--acid-yellow), -3px -3px 0 var(--deep-blue);
+    word-break: break-word;
+    position: relative; /* Для глитча и transform */
+    transform: rotate(-1deg);
+    animation: contact-pulse 3s infinite alternate;
+}
+
+
+/* --- Подвал (только для index.html) --- */
+footer { text-align: center; padding: 30px 20px; margin-top: 40px; border-top: 1px solid var(--deep-blue); color: rgba(255, 255, 255, 0.5); font-size: 0.9em; }
+
+/* --- Стили для замаскированного времени (только для index.html) --- */
+.masked-time { position: fixed; bottom: 10px; right: 15px; font-family: var(--font-main); font-size: 1rem; color: var(--main-red); opacity: 0.5; transform: rotate(2deg) skewX(-5deg); z-index: 101; pointer-events: none; text-shadow: 1px 1px 0 var(--deep-blue); animation: time-flicker 6s infinite linear alternate; }
+
+/* --- Анимации --- */
+.glitch { position: relative; }
+.glitch::before,
+.glitch::after { content: attr(data-text); position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: var(--dark-bg); overflow: hidden; }
+.glitch::before { left: 2px; text-shadow: -1px 0 var(--main-red); animation: glitch-anim-1 2s infinite linear alternate-reverse; }
+.glitch::after { left: -2px; text-shadow: -1px 0 var(--deep-blue); animation: glitch-anim-2 3s infinite linear alternate-reverse; }
+
+@keyframes glitch-anim-1 { 0% { clip-path: inset(10% 0 80% 0); } 20% { clip-path: inset(40% 0 30% 0); } 40% { clip-path: inset(90% 0 5% 0); } 60% { clip-path: inset(25% 0 60% 0); } 80% { clip-path: inset(50% 0 45% 0); } 100% { clip-path: inset(75% 0 10% 0); } }
+@keyframes glitch-anim-2 { 0% { clip-path: inset(70% 0 15% 0); } 20% { clip-path: inset(20% 0 55% 0); } 40% { clip-path: inset(85% 0 2% 0); } 60% { clip-path: inset(5% 0 80% 0); } 80% { clip-path: inset(60% 0 30% 0); } 100% { clip-path: inset(35% 0 40% 0); } }
+@keyframes shake { 0%, 100% { transform: translateX(0) skewX(-10deg) scale(1.05); } 10%, 30%, 50%, 70%, 90% { transform: translateX(-3px) skewX(-10deg) scale(1.05); } 20%, 40%, 60%, 80% { transform: translateX(3px) skewX(-10deg) scale(1.05); } }
+@keyframes flicker { 0%, 100% { opacity: 0.15; } 50% { opacity: 0.1; } }
+@keyframes time-flicker { 0%, 100% { opacity: 0.5; } 50% { opacity: 0.3; } }
+@keyframes blend-move { from { transform: translateY(-50%) skewY(-5deg) translateX(-5%); } to { transform: translateY(-45%) skewY(-4deg) translateX(5%); } }
+@keyframes contact-pulse { from { transform: rotate(-1deg) scale(1); opacity: 0.9; } to { transform: rotate(-1.5deg) scale(1.03); opacity: 1; } }
