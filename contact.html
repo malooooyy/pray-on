@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>НЕ БЕСПОКОИТЬ</title>
+    <!-- Подключаем тот же CSS-файл -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet">
+    <!-- Добавим стили прямо сюда для позиционирования на всю страницу -->
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow: hidden; /* Убираем прокрутку на этой странице */
+            background-color: var(--dark-bg); /* Фон как у основной страницы */
+        }
+        /* Используем класс .contact как контейнер на всю страницу */
+        body > .contact {
+            min-height: 100%; /* Занимаем всю высоту */
+            height: 100%;
+            width: 100%;
+            border-top: none; /* Убираем верхнюю границу */
+            /* Добавляем оверлеи и сюда */
+            position: relative;
+             /* Центрируем контент */
+             display: flex;
+            justify-content: center; /* Горизонтальное центрирование */
+            align-items: center;   /* Вертикальное центрирование */
+            text-align: center;    /* Центрирование текста внутри h2, если переносится */
+            /* padding: 5%; */ /* <-- УБРАЛИ ПАДДИНГ */
+        }
+         /* Коррекция фона глитча для этой страницы */
+        body > .contact .glitch::before,
+        body > .contact .glitch::after {
+             background: var(--dark-bg); /* Фон страницы contact.html */
+        }
+        /* Убедимся, что оверлеи под сообщением, если z-index конфликтует */
+        .noise-overlay, .grid-overlay { z-index: 1; }
+        .contact-message { z-index: 2; }
+    </style>
+</head>
+<body>
+    <!-- Добавляем оверлеи и сюда, чтобы стиль был консистентным -->
+    <div class="noise-overlay"></div>
+    <div class="grid-overlay"></div>
+
+    <!-- Оборачиваем сообщение в .contact для применения стилей -->
+    <section class="contact">
+        <h2 class="contact-message glitch" data-text="НЕ ЗВОНИ МНЕ НА МОБИЛУ СУКА">
+            НЕ ЗВОНИ МНЕ НА МОБИЛУ СУКА
+        </h2>
+    </section>
+
+    <!-- Сюда можно не добавлять script.js -->
+</body>
+</html>
